@@ -1,0 +1,102 @@
+:root {
+    --color-01: #0f1726;
+    --color-01-gradient: linear-gradient(180deg, rgba(15,23,38,1) 0%, rgb(19, 29, 49) 100%);
+    --color-01-transp: #0f1726aa;
+    --color-02:rgba(242,61,127,1);
+    --color-base: #ffff
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* TRANSCRIPTS */
+.app__transcripts {
+    position: absolute;
+    top: 1rem;
+    left: 0;
+
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 1;
+
+    transition: 0.2s ease-out;
+}
+
+.app__transcripts--off {
+    opacity: 0;
+}
+
+.app__transcripts-box {
+    width: 90%;
+    height: 8rem;
+    border: solid var(--color-base) 0.2rem;
+    border-radius: 1.4rem;
+    background-color: var(--color-01-transp);
+
+    padding: 1rem;
+    overflow: hidden;
+    
+    color: var(--color-base);
+    font-size: 1.2rem;
+}
+
+@media  (min-width: 600px) {
+    .app__transcripts-box {
+        height: 10rem;
+        font-size: 1.4rem;
+    }
+}
+
+/* CONTROLS */
+.app__controls {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    padding: 1.2rem;
+    background: var(--color-01);
+    background: var(--color-01-gradient);
+    border-radius: 1.4rem 1.4rem  0rem 0rem;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.app__btn {
+    height: 4rem;
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+    background-color: transparent;
+    border: var(--color-base) solid 0.2rem;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app__btn--selected {
+    background-color: var(--color-02);
+}
+
+.app__btn-icon {
+    height: 1.8rem;
+}
+
+
