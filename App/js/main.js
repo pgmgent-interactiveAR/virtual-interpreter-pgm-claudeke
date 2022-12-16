@@ -12,7 +12,8 @@ const transcripts = document.querySelector('.app__transcripts');
 const diagnostic = document.querySelector('.app__transcripts-box');
 
 const handModelParent = document.querySelector('#model-box');
-const handModel = document.querySelector('#model');
+const handModel = document.querySelector('#model--hand');
+const handsModel = document.querySelector('#model--hands');
 
 const modal = document.querySelector('.app__modal');
 const modalCloseBtn = document.querySelector('.modal__btn');
@@ -20,51 +21,51 @@ const modalCloseBtn = document.querySelector('.modal__btn');
 // animation list 
 const animationList = [{
     animationName: 'hello',
-    src: '#hand',
-    target: 152,
+    model: 'hand',
+    target: 288,
     position: {
-        x: 0,
-        y: -4,
+        x: 0.2,
+        y: 0.5,
         z: 0,
     }
 },
 {
     animationName: 'nice',
-    src: '#hands',
+    model: 'hands',
     target: 152,
     position: {
         x: 0,
-        y: -4,
+        y: -3,
         z: 0,
     }
 },
 {
     animationName: 'meet',
-    src: '#hands',
+    model: 'hands',
     target: 152,
     position: {
         x: 0,
-        y: -4,
+        y: -3,
         z: 0,
     }
 },
 {
     animationName: 'you',
-    src: '#hand',
+    model: 'hand',
     target: 152,
     position: {
-        x: 0,
-        y: -4,
+        x: 0.5,
+        y: -0.4,
         z: 0,
     }
 },
 {
     animationName: 'thanks',
-    src: '#hand',
+    model: 'hand',
     target: 152,
     position: {
-        x: 0,
-        y: -4,
+        x: 0.25,
+        y: -0.55,
         z: 0,
     }
 },
@@ -139,6 +140,9 @@ const animationStopped = document.body.addEventListener("animation-finished", (e
         handModel.removeAttribute('animation-mixer');
         handModel.setAttribute('visible', false);
 
+        handsModel.removeAttribute('animation-mixer');
+        handsModel.setAttribute('visible', false);
+
         recognizedWords = 0;
     }
 });
@@ -162,14 +166,39 @@ btnTranscript.addEventListener('click', (ev) => {
 // FUNCTIONS 
 // play animation function
 const playAni = (object) => {
-    handModel.setAttribute('visible', true);
-    handModel.setAttribute('animation-mixer', {
-        clip: object.animationName,
-        loop: 'once',
-    });
-    handModel.setAttribute('src', object.src)
-    console.log(object.src)
-    handModel.setAttribute('src', object.src);
-    console.log(handModel.getAttribute('src'))
+    if (object.model === 'hand') {
+        handsModel.setAttribute('visible', false);
+
+        handModelParent.setAttribute('mindar-face-target', {
+            anchorIndex: object.target
+        });
+
+        handModel.setAttribute('visible', true);
+        handModel.setAttribute('position', object.position);
+        handModel.setAttribute('animation-mixer', {
+            clip: object.animationName,
+            loop: 'once',
+        });
+
+        console.log(handModelParent.getAttribute('mindar-face-target'));
+        console.log(handModelParent.getAttribute('position'));
+    } else if (object.model === 'hands'){
+        handModel.setAttribute('visible', false);
+
+        handModelParent.setAttribute('mindar-face-target', {
+            anchorIndex: object.target
+        });
+
+        handsModel.setAttribute('visible', true);
+        handModel.setAttribute('position', object.position);
+        handsModel.setAttribute('animation-mixer', {
+            clip: object.animationName,
+            loop: 'once',
+        });
+
+        console.log(handModelParent.getAttribute('mindar-face-target'));
+        console.log(handModelParent.getAttribute('position'));
+    }
+
 }
 
