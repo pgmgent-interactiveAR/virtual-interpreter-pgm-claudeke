@@ -1,14 +1,16 @@
+// speech variables
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 var SpeechGrammarList = SpeechGrammarList || window.webkitSpeechGrammarList
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
 
-// get buttons
+// get elements from document
 const btnRecord = document.querySelector('.app__btn--record');
 const btnStop = document.querySelector('.app__btn--stop');
 const btnTranscript = document.querySelector('.app__btn--transcript');
 
-// get transcriptbox
 const transcripts = document.querySelector('.app__transcripts');
+const diagnostic = document.querySelector('.app__transcripts-box');
+const handModel = document.querySelector('#app__model');
 
 // animation list 
 const animationList = [{
@@ -36,9 +38,8 @@ recognition.lang = 'en-US';
 recognition.interimResults = false;
 recognition.maxAlternatives = 1;
 
-var diagnostic = document.querySelector('.app__transcripts-box');
 
-// start
+// start recording
 btnRecord.addEventListener('click', (ev) => {
     btnRecord.classList.add('app__btn--selected');
     btnStop.classList.remove('app__btn--selected');
@@ -47,9 +48,9 @@ btnRecord.addEventListener('click', (ev) => {
     console.log('Ready to receive a color command.');
 });
 
+// result 
 const renderQueue = [];
-
-const handModel = document.querySelector('#app__model')
+let recognizedWords = 0
 
 recognition.onresult = function (event) {
     console.log(event.results);
@@ -58,32 +59,44 @@ recognition.onresult = function (event) {
     const allWords = text.split(" ");
     console.log(allWords);
 
+    allWords.forEach(word => {
+        animationList.forEach(ani => {            
+            if (word === ani.animationName) {
+                // add +1 recognized words 
+                recognizedWords++;
+                // check if animation is running 
+                if (handModel.getAttribute('animation-mixer')) {
+                    renderQueue.push(ani)
+                } else {
+                    // if running add to renderQueue
+                    playAni(ani)
+                }
+            } 
+        });
+    });
+
+    // if no words are recognized
+    if (recognizedWords === 0) {
+        alert('no words in our vocabulary')
+    } 
+
+    // remove recording selection 
     btnRecord.classList.remove('app__btn--selected');
     btnStop.classList.add('app__btn--selected');
-
-    animationList.forEach(ani => {            
-        if (text.includes(ani.animationName)) {
-            // check if animation is running 
-            // if running add to renderQueue
-            // shift to get next 
-            handModel.setAttribute('visible', true)
-            handModel.setAttribute('animation-mixer', {
-                clip: ani.animationName,
-                loop: 'once',
-            })
-        } 
-    });
 }
 
 // stop animation
 const animationStopped = document.body.addEventListener("animation-finished", (ev) => {
-    if (renderQue.length > 0) {
-
+    if (renderQueue.length > 0) {
+        // shift to get next 
+        var next = renderQueue.shift()
+        playAni(next);
     } else {
         handModel.removeAttribute('animation-mixer');
         handModel.setAttribute('visible', false);
-    }
 
+        recognizedWords = 0;
+    }
 });
 
 // stop
@@ -101,3 +114,14 @@ btnTranscript.addEventListener('click', (ev) => {
         transcripts.classList.remove('app__transcripts--off');
     };
 });
+
+// FUNCTIONS 
+
+// play animation function
+const playAni = (object) => {
+    handModel.setAttribute('visible', true)
+    handModel.setAttribute('animation-mixer', {
+        clip: object.animationName,
+        loop: 'once',
+    })
+}

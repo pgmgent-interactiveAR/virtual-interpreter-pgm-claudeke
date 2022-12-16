@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Face Filter - App</title>
+    <title>AR virtual translator - App</title>
     <link rel="stylesheet" href="./css/style.css">
 
     <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.5/dist/mindar-face.prod.js"></script>
@@ -22,6 +22,10 @@
             <a-gltf-model id="app__model" visible="false" position="0 -0.4 0" rotation="0 0 0" scale="1 1 1" src="#hands"></a-gltf-model>
         </a-entity>
     </a-scene>
+
+    <div class="app_modal">
+        <p>Sorry, words do not match the ones in our vocabulary.</p>
+    </div>
 
     <div class="app__transcripts app__transcripts--off">
         <div class="app__transcripts-box"></div>
