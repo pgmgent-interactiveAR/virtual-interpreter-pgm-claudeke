@@ -10,25 +10,67 @@ const btnTranscript = document.querySelector('.app__btn--transcript');
 
 const transcripts = document.querySelector('.app__transcripts');
 const diagnostic = document.querySelector('.app__transcripts-box');
-const handModel = document.querySelector('#app__model');
+
+const handModelParent = document.querySelector('#model-box');
+const handModel = document.querySelector('#model');
+
+const modal = document.querySelector('.app__modal');
+const modalCloseBtn = document.querySelector('.modal__btn');
 
 // animation list 
 const animationList = [{
     animationName: 'hello',
+    src: '#hand',
+    target: 152,
+    position: {
+        x: 0,
+        y: -4,
+        z: 0,
+    }
 },
 {
     animationName: 'nice',
+    src: '#hands',
+    target: 152,
+    position: {
+        x: 0,
+        y: -4,
+        z: 0,
+    }
 },
 {
     animationName: 'meet',
+    src: '#hands',
+    target: 152,
+    position: {
+        x: 0,
+        y: -4,
+        z: 0,
+    }
 },
 {
     animationName: 'you',
+    src: '#hand',
+    target: 152,
+    position: {
+        x: 0,
+        y: -4,
+        z: 0,
+    }
 },
 {
     animationName: 'thanks',
+    src: '#hand',
+    target: 152,
+    position: {
+        x: 0,
+        y: -4,
+        z: 0,
+    }
 },
 ]
+
+handModel.getAttribute('src')
 
 // recognition
 var recognition = new SpeechRecognition();
@@ -45,9 +87,7 @@ btnRecord.addEventListener('click', (ev) => {
     btnStop.classList.remove('app__btn--selected');
 
     recognition.start();
-    console.log('Ready to receive a color command.');
 });
-
 // result 
 const renderQueue = [];
 let recognizedWords = 0
@@ -57,7 +97,6 @@ recognition.onresult = function (event) {
     var text = event.results[0][0].transcript;
     diagnostic.textContent = text + '.';
     const allWords = text.split(" ");
-    console.log(allWords);
 
     allWords.forEach(word => {
         animationList.forEach(ani => {            
@@ -77,13 +116,18 @@ recognition.onresult = function (event) {
 
     // if no words are recognized
     if (recognizedWords === 0) {
-        alert('no words in our vocabulary')
+        modal.classList.remove('app__modal--disabled');
     } 
 
     // remove recording selection 
     btnRecord.classList.remove('app__btn--selected');
     btnStop.classList.add('app__btn--selected');
 }
+
+// close modal 
+modalCloseBtn.addEventListener('click', (ev) => {
+    modal.classList.add('app__modal--disabled');
+})
 
 // stop animation
 const animationStopped = document.body.addEventListener("animation-finished", (ev) => {
@@ -116,12 +160,16 @@ btnTranscript.addEventListener('click', (ev) => {
 });
 
 // FUNCTIONS 
-
 // play animation function
 const playAni = (object) => {
-    handModel.setAttribute('visible', true)
+    handModel.setAttribute('visible', true);
     handModel.setAttribute('animation-mixer', {
         clip: object.animationName,
         loop: 'once',
-    })
+    });
+    handModel.setAttribute('src', object.src)
+    console.log(object.src)
+    handModel.setAttribute('src', object.src);
+    console.log(handModel.getAttribute('src'))
 }
+
