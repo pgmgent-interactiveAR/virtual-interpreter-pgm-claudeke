@@ -24,8 +24,8 @@ const animationList = [{
     model: 'hand',
     target: 288,
     position: {
-        x: 0.2,
-        y: 0.5,
+        x: 0.6,
+        y: 0.8,
         z: 0,
     }
 },
@@ -35,7 +35,7 @@ const animationList = [{
     target: 152,
     position: {
         x: 0,
-        y: -3,
+        y: -0.3,
         z: 0,
     }
 },
@@ -45,7 +45,7 @@ const animationList = [{
     target: 152,
     position: {
         x: 0,
-        y: -3,
+        y: -0.3,
         z: 0,
     }
 },
@@ -54,8 +54,8 @@ const animationList = [{
     model: 'hand',
     target: 152,
     position: {
-        x: 0.5,
-        y: -0.4,
+        x: 0.6,
+        y: -0.2,
         z: 0,
     }
 },
@@ -180,8 +180,6 @@ const playAni = (object) => {
             loop: 'once',
         });
 
-        console.log(handModelParent.getAttribute('mindar-face-target'));
-        console.log(handModelParent.getAttribute('position'));
     } else if (object.model === 'hands'){
         handModel.setAttribute('visible', false);
 
@@ -190,14 +188,11 @@ const playAni = (object) => {
         });
 
         handsModel.setAttribute('visible', true);
-        handModel.setAttribute('position', object.position);
+        handsModel.setAttribute('position', object.position);
         handsModel.setAttribute('animation-mixer', {
             clip: object.animationName,
             loop: 'once',
         });
-
-        console.log(handModelParent.getAttribute('mindar-face-target'));
-        console.log(handModelParent.getAttribute('position'));
     }
 
 }
