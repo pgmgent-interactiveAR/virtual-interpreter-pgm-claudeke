@@ -94,7 +94,6 @@ const renderQueue = [];
 let recognizedWords = 0
 
 recognition.onresult = function (event) {
-    console.log(event.results);
     var text = event.results[0][0].transcript;
     diagnostic.textContent = text + '.';
     const allWords = text.split(" ");
@@ -114,8 +113,6 @@ recognition.onresult = function (event) {
             } 
         });
     });
-
-    console.log(recognizedWords)
 
     // if no words are recognized
     if (recognizedWords === 0) {
