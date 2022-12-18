@@ -19,6 +19,10 @@ body {
     overflow: hidden;
 }
 
+.app {
+    overflow: hidden;
+}
+
 /* MODAL */
 .app__modal {  
     position: absolute;
@@ -54,7 +58,18 @@ body {
     color: var(--color-base);
     text-align: center;
     position: relative;
+}
 
+.modal--hide {
+    display: none;
+}
+
+.modal__btns {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+
+    margin-top: 1rem;
 }
 
 .modal__btn {
@@ -64,6 +79,13 @@ body {
     color: var(--color-base);
     padding: 0.5rem;
 
+}
+
+.modal__btn--answer {
+    width: 4rem;
+}
+
+.modal__btn--close {
     position: absolute;
     right: -1rem;
     top: -0.5rem;
@@ -153,4 +175,14 @@ body {
     height: 1.8rem;
 }
 
+/* INSTRUCTIONS */
 
+.instructions {
+    position: absolute;
+    top: -3rem;
+    left: 6rem;
+}
+
+.instructions__arrow {
+    height: 2rem;
+}

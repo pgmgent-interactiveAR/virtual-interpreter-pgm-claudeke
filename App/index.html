@@ -25,10 +25,50 @@
         </a-entity>
     </a-scene>
 
-    <div class="app__modal app__modal--disabled">
+    <div class="app__modal app__modal--instruction">
+        <div class="modal modal__instruction--one">
+            <p>Welcome to the virtual interpreter where you can translate words to sign language.</p>
+            <p>Do we need to guide you through the app?</p>
+            <div class="modal__btns">
+                <button class="modal__btn modal__btn--answer modal__btn--yes">Yes</button>
+                <button class="modal__btn modal__btn--answer modal__btn--no">No</button>
+            </div>
+        </div>
+        <div class="modal modal__instruction--two modal--hide">
+            <p>Click on this button to start recording what you want to translate.</p>
+            <button class="app__btn">
+                <img class="app__btn-icon" src="./assets/icons/microphone-lines-solid.svg" alt="">
+            </button>
+            <p>The recording will stop automatically once your done speaking.</p>
+            <div class="modal__btns">
+                <button class="modal__btn modal__btn--answer modal__btn--ok" value="two">Ok</button>
+            </div>
+        </div>
+        <div class="modal modal__instruction--three modal--hide">
+            <p>Click on this button to stop the recording.</p>
+            <button class="app__btn">
+                <img class="app__btn-icon" src="./assets/icons/microphone-lines-slash-solid.svg" alt="">
+            </button>
+            <div class="modal__btns">
+                <button class="modal__btn modal__btn--answer modal__btn--ok" value="three">Ok</button>
+            </div>
+        </div>
+        <div class="modal modal__instruction--four modal--hide">
+            <p>Click on this button to see the transcription of your recording.</p>
+            <button class="app__btn">
+                <img class="app__btn-icon" src="./assets/icons/message-solid.svg" alt="">
+            </button>
+            <p>The transcription will appear on the top of your screen.</p>
+            <div class="modal__btns">
+                <button class="modal__btn modal__btn--answer modal__btn--ok" value="four">Ok</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="app__modal app__modal--no-match app__modal--disabled">
         <div class="modal">
             <p>Sorry, 0 words match the ones in our vocabulary.</p>
-            <button class="modal__btn">
+            <button class="modal__btn modal__btn--close">
                 <img class="modal__btn-image" src="./assets/icons/xmark-solid.svg" alt="">
             </button>
         </div>
@@ -50,6 +90,7 @@
         </button>
     </div>
 
+    <script src="./js/instructions.js"></script>
     <script src="./js/main.js"></script>
 
 </body>

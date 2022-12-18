@@ -15,8 +15,8 @@ const handModelParent = document.querySelector('#model-box');
 const handModel = document.querySelector('#model--hand');
 const handsModel = document.querySelector('#model--hands');
 
-const modal = document.querySelector('.app__modal');
-const modalCloseBtn = document.querySelector('.modal__btn');
+const modalNoMatch = document.querySelector('.app__modal--no-match');
+const modalCloseBtn = document.querySelector('.modal__btn--close');
 
 // animation list 
 const animationList = [{
@@ -115,9 +115,11 @@ recognition.onresult = function (event) {
         });
     });
 
+    console.log(recognizedWords)
+
     // if no words are recognized
     if (recognizedWords === 0) {
-        modal.classList.remove('app__modal--disabled');
+        modalNoMatch.classList.remove('app__modal--disabled');
     } 
 
     // remove recording selection 
@@ -127,7 +129,7 @@ recognition.onresult = function (event) {
 
 // close modal 
 modalCloseBtn.addEventListener('click', (ev) => {
-    modal.classList.add('app__modal--disabled');
+    modalNoMatch.classList.add('app__modal--disabled');
 })
 
 // stop animation
